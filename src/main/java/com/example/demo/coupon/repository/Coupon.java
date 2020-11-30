@@ -9,7 +9,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -36,8 +35,8 @@ public class Coupon {
   @CreatedDate
   LocalDateTime created;
 
-  @Builder //check - access 걸면 mapperImpl에서 생성자 접근이 안된다고 함.
-  public Coupon(String name, String type, int discountRate) {
+  @Builder
+  private Coupon(String name, String type, int discountRate) {
     this.name = name;
     this.type = type;
     this.discountRate = discountRate;

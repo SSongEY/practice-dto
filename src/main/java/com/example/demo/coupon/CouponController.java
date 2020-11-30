@@ -1,7 +1,6 @@
 package com.example.demo.coupon;
 
 import com.example.demo.coupon.dto.CouponDto;
-import com.example.demo.coupon.repository.Coupon;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
