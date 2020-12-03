@@ -11,7 +11,7 @@ public interface CouponMapper {
   CouponMapper INSTANCE = Mappers.getMapper(CouponMapper.class);
 
   Coupon createReqToEntity(CouponDto.CreateReq createReq);
-  CouponDto.CreateRes entityToCreateRes(Coupon coupon); //check naming
+  CouponDto.CreateRes entityToCreateRes(Coupon coupon);
 }
 
 

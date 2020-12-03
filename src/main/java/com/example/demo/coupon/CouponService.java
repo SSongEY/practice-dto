@@ -13,8 +13,9 @@ public class CouponService {
   private final CouponRepository couponRepository;
 
   CouponDto.CreateRes createCoupon(CouponDto.CreateReq reqDto) {
-    Coupon newCoupon = couponRepository.save(reqDto.createReqToEntity());
-    CouponDto.CreateRes result = CouponDto.CreateRes.entityToCreateRes(newCoupon);
+    Coupon newCoupon = couponRepository.save(reqDto.toEntity());
+
+    CouponDto.CreateRes result = CouponDto.CreateRes.of(Coupon.builder().name(" ").build());
     return result;
   }
 }

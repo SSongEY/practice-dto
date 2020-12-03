@@ -6,13 +6,17 @@
  - 도메인 또는 리소스 별 DTO 클래스 생성 후(CouponDto), 각 API(Controller 에 정의된 메소드: CreateReq, CreateRes) 에 해당하는 DTO를 InnerClass 로 정의
  - CouponDto의 객체 생성을 하지 않으므로 InnerClass는 static 키워드를 명시한다.
 
+<br>
+
 ### #2.생성자의 접근자는 최소한으로
  - 객체 생성이 불필요한 클래스의 기본 생성자 접근자는 Private로 지정  
   --> 개별 DTO는 InnerClass로 정의하기 때문에 객체 생성이 불필요하다.  
  
 ![](./002.PNG)
 
-### #3. Reqeust Dto 클래스
+<br>
+
+### #3. Request Dto 클래스
 ![](./003.PNG)
 
 #### ##3-1. @NoArgsConstructor 의 접근자는 Private로 한다.
@@ -29,8 +33,8 @@
  
  - Validation이 실패할 경우, MethodArgumentNotValidException 의 예외가 발생한다.
 ![](./007.PNG)
-(MethodArgumentNotValidException  이미지)
 
+<br>
 
 ### #4. Response Dto 클래스
 ![](./008.PNG)
@@ -47,9 +51,9 @@
  - @ResponseBody 를 사용하면 Spring 내부에서 Jackson 라이브러리를 사용하여 Response 객체를 Serialize(ByteCode로 변환) 하는데 이때 getter 메소드를 사용한다.  
  - 따라서 response 객체는 @Getter 를 사용해야 한다.
 
-
+<br>
 <hr>
-
+<br>
 
 ## MapStruct
 - DTO -> Entity, Entity -> DTO의 객체 매핑을 위한 라이브러리
@@ -59,6 +63,8 @@
 - 롬복과 함께 사용 시, lombok annotationProcessor 보다 mapstruct annotationProcessor가 먼저 선언이 되야 한다.
 - SpringBoot 버전에 호환하는 MapStruct 버전이 존재, 해당부분 확인 필요
 ![](./010.PNG)
+
+<br>
 
 ### #2. Mapper Interface 생성
 ![](./011.PNG)
@@ -83,13 +89,29 @@
 - 빌드 시점에 CouponMapper 를 상속받은 CouponMapperImpl(구현체) 클래스가 생성된다.
 - 따라서 이 구현체를 사용할 수 있는 객체를 생성한다.
 
+<br>
+
 ### #3. Mapper 사용
 
 #### #3-1. Dto to Entity 또는 Entity to Dto 선언부 생성
 ![](./012.PNG)
 
 #### #3-2. @Getter, @Builder 설정
- - 변환과정에서 꺼내오는 객체(source)에는 Getter가 있어야 하고, 변환해서 저장하고자 하는 객체(target)에는 Builder 혹은 Setter가 있어야 하는데 Setter는 지양한다.
+- 변환과정에서 꺼내오는 객체(source)에는 Getter가 있어야 하고, 변환해서 저장하고자 하는 객체(target)에는 Builder 혹은 Setter가 있어야 하는데 Setter는 지양한다.  
 ![](./013.PNG)
 ![](./014.PNG)
 ![](./015.PNG)
+
+<br>
+
+##### 201203 수정사항
+- Dto 클래스 내 Mapper 호출 메소드 명 변경  
+ --> createReqToEntity() -> toEntity()  
+ --> entityToCreateRes() -> of()  
+ 
+- Response Dto 클래스 내 Validation 제거  
+ -- res Dto 클래스 serialize 전 validation 로직 없음  
+
+- MethodArgumentNotValidException 이미지 추가
+ 
+ 

@@ -6,7 +6,6 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CouponDto {
@@ -21,7 +20,7 @@ public class CouponDto {
     @NotNull
     private Integer discountRate;
 
-    public Coupon createReqToEntity() {
+    public Coupon toEntity() {
       return CouponMapper.INSTANCE.createReqToEntity(this);
     }
   }
@@ -30,10 +29,9 @@ public class CouponDto {
   @Builder
   @AllArgsConstructor(access = AccessLevel.PRIVATE)
   public static class CreateRes {
-    @NotBlank
     private String name;
 
-    public static CreateRes entityToCreateRes(Coupon coupon) {
+    public static CreateRes of(Coupon coupon) {
       return CouponMapper.INSTANCE.entityToCreateRes(coupon);
     }
   }
